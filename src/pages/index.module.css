@@ -50,7 +50,7 @@
 }
 
 .contentForm {
-  width: 30%;
+  width: 40%;
   margin-left: 60px;
 }
 
@@ -76,6 +76,84 @@
 .input {
   width: 100%;
 }
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .content {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 12px;
+    margin-top: 16px;
+  }
+}
+
+
+.titleLink {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.textLink {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.textNewLink {
+  font-size: 14px;
+  color: #4628A4;
+}
+
+.longLink {
+  display: flex;
+  align-items: center;
+}
+
+.newLink {
+  width: 100%;
+  margin-top: 32px;
+}
+
+.buttonCopy {
+  display: inline-flex;
+  margin-left: 16px;
+  padding: 7px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border: none;
+  border-radius: 8px;
+  background: #D632D9;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  cursor: pointer;
+
+}
+
+.buttonCopy:hover {
+  background-color: #4628A4;
+  transition: 0.2s ease-in;
+}
+
+@media (max-width: 640px) {
+  .buttonCopy {
+   margin-left: 0;
+  }
+}
+
+
+
+
 
 @media (max-width: 640px) {
   .input {
