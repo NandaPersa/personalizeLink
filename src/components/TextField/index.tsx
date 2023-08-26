@@ -1,8 +1,8 @@
-import React from 'react';
-import { ErrorMessage, Field, FormikProps } from 'formik';
+import React, { type InputHTMLAttributes } from 'react';
+import { type FormikProps } from 'formik';
 import styles from './textField.module.css'
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLElement> {
     label: string;
     placeholder: string;
     name: string,

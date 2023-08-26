@@ -27,7 +27,7 @@ export const referenceRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.linkReference.findMany() as unknown as Promise<Reference[]>;
   }),
-  create: publicProcedure.input(z.object({ origin: z.string() })).query(async ({ ctx, input }) => {
+  create: publicProcedure.input(z.object({ origin: z.string() })).mutation(async ({ ctx, input }) => {
     const isExist = await ctx.prisma.linkReference.findFirst({
       where: {
         origin: input.origin
