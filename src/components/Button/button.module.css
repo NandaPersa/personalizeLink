@@ -15,4 +15,12 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
+    cursor: pointer;
+
 }
+
+.button:hover {
+    background-color: #4628A4;
+    transition: 0.2s ease-in;
+  }
