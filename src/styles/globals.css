@@ -46,3 +46,8 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+:focus {
+	outline: transparent;
+	box-shadow: 0 0 0 2px #D632D9;
+}

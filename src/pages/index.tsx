@@ -12,20 +12,23 @@ import { useState } from "react";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { z } from "zod";
 
 export default function Home() {
 
-  const [newLink, setNewLink] = useState<string>('https://giovanadias.medium.com/ux-ui-5-boas-pr%C3%A1ticas-em-p%C3%A1ginas-de-erro-404-d8386ffa79a3');
+  const [newLink, setNewLink] = useState<string>();
+  const [isLinkValid, setIsLinkValid] = useState<boolean>(true)
   
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
-      console.log(data);
       setNewLink(`${window.location.href}r/${data.link}`)
     },
+    onError() {
+      toast.error('Não foi possível criar link curto. Tente novamente')
+    }
   });
 
   function createNewLink(link: string) {
-    console.log('função')
     createReference({ origin: link});
   }
 
@@ -39,6 +42,12 @@ export default function Home() {
     }
   }
 
+  const linkSchema = z.string().refine(value => {
+    return value.startsWith('http://') || value.startsWith('https://');
+  }, {
+    message: 'Digite um link válido começando com http:// ou https://',
+  });
+
   
   const formik = useFormik({
     initialValues: {
@@ -46,10 +55,20 @@ export default function Home() {
     },
     onSubmit: values => {
       try {
-        console.log('formik')
-      createNewLink(values.longLink)
+        linkSchema.parse(values.longLink);
+        try {
+          setIsLinkValid(true);
+          createNewLink(values.longLink);
+        } catch (e) {
+          toast.error('Não foi possível criar link curto. Tente novamente')
+        }
       } catch (e) {
-        console.log(e);
+        if (e instanceof z.ZodError) {
+          setIsLinkValid(false);
+          const error = JSON.parse(e.message)
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+          toast.error(error[0].message)
+        } 
       }
     },
   });
@@ -80,6 +99,7 @@ export default function Home() {
                   label="*Seu link longo:" 
                   placeholder="Cole o link aqui" 
                   formik={formik} 
+                  isLinkValid={isLinkValid}
                 />
               </div>
            )}
