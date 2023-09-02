@@ -10,10 +10,13 @@ import background from '../assets/backgroundEncLink.svg'
 import { useFormik } from 'formik';
 import { useState } from "react";
 import Link from "next/link";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
 
-  const [newLink, setNewLink] = useState<string>();
+  const [newLink, setNewLink] = useState<string>('https://giovanadias.medium.com/ux-ui-5-boas-pr%C3%A1ticas-em-p%C3%A1ginas-de-erro-404-d8386ffa79a3');
+  
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
       console.log(data);
@@ -26,8 +29,14 @@ export default function Home() {
     createReference({ origin: link});
   }
 
+
   function handleCopy() {
+    try{
     void navigator.clipboard.writeText(newLink ?? '');
+      toast.success('Link copiado com sucesso!')
+    } catch {
+      toast.error('Não foi possível copiar o link. Tente Novamente.')
+    }
   }
 
   
@@ -62,14 +71,15 @@ export default function Home() {
         <div className={styles.container}>
           <form onSubmit={formik.handleSubmit} className={styles.contentForm}>
             <h1 className={styles.title}>Encurtador de link</h1>
-            <p className={styles.text}>Encurte seu link de maneira gratís, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.</p>
+            <p className={styles.text}>Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.</p>
               {!newLink && (
               <div className={styles.input}>
                 <TextField 
-                name="longLink" 
-                label="*Seu link longo:" 
-                placeholder="Cole o link aqui" 
-                formik={formik} 
+                  type="url"
+                  name="longLink" 
+                  label="*Seu link longo:" 
+                  placeholder="Cole o link aqui" 
+                  formik={formik} 
                 />
               </div>
            )}

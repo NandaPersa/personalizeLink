@@ -55,6 +55,7 @@ export const referenceRouter = createTRPCRouter({
     }) as unknown as Reference
 
     if(isExist){
+      ctx.res.setHeader('Cache-Control', 's-maxage=3600');
       return { success: true, origin: isExist.origin };
     }else{
       return { success: false }

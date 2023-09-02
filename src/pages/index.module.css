@@ -19,12 +19,19 @@
   }
 }
 
+@media (min-width: 1370px) {
+  .main {
+    padding: 0 300px;
+  }
+}
+
 .title {
   color: #000;
   font-size: 32px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  font-family: inherit;
 
   margin-bottom: 12px;
 }
@@ -35,6 +42,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: inherit;
 
   margin-bottom: 36px;
 }
@@ -93,16 +101,19 @@
 
 
 .titleLink {
+  font-family: inherit;
   font-size: 16px;
   font-weight: 600;
 }
 
 .textLink {
+  font-family: inherit;
   font-size: 14px;
   margin-left: 5px;
 }
 
 .textNewLink {
+  font-family: inherit;
   font-size: 14px;
   color: #4628A4;
 }
@@ -135,6 +146,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  font-family: inherit;
 
   cursor: pointer;
 
