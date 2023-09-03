@@ -21,7 +21,8 @@ export default function Home() {
   
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
-      setNewLink(`${window.location.href}r/${data.link}`)
+      const smallLink = `${window.location.href}r/${data.link}`.replace('wwww.', '');
+      setNewLink(smallLink)
     },
     onError() {
       toast.error('Não foi possível criar link curto. Tente novamente')
