@@ -6,26 +6,29 @@ import Header from "~/components/Header";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import background from '../assets/backgroundEncLink.svg'
+import background from '../assets/backgroundEncLink.png'
 import { useFormik } from 'formik';
 import { useState } from "react";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { z } from "zod";
 
 export default function Home() {
 
-  const [newLink, setNewLink] = useState<string>('https://giovanadias.medium.com/ux-ui-5-boas-pr%C3%A1ticas-em-p%C3%A1ginas-de-erro-404-d8386ffa79a3');
+  const [newLink, setNewLink] = useState<string>();
+  const [isLinkValid, setIsLinkValid] = useState<boolean>(true)
   
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
-      console.log(data);
       setNewLink(`${window.location.href}r/${data.link}`)
     },
+    onError() {
+      toast.error('Não foi possível criar link curto. Tente novamente')
+    }
   });
 
   function createNewLink(link: string) {
-    console.log('função')
     createReference({ origin: link});
   }
 
@@ -39,6 +42,18 @@ export default function Home() {
     }
   }
 
+  function handleShortenNewLink() {
+    setNewLink('');
+    formik.resetForm()
+    
+  }
+
+  const linkSchema = z.string().refine(value => {
+    return value.startsWith('http://') || value.startsWith('https://');
+  }, {
+    message: 'Digite um link válido começando com http:// ou https://',
+  });
+
   
   const formik = useFormik({
     initialValues: {
@@ -46,10 +61,20 @@ export default function Home() {
     },
     onSubmit: values => {
       try {
-        console.log('formik')
-      createNewLink(values.longLink)
+        linkSchema.parse(values.longLink);
+        try {
+          setIsLinkValid(true);
+          createNewLink(values.longLink);
+        } catch (e) {
+          toast.error('Não foi possível criar link curto. Tente novamente')
+        }
       } catch (e) {
-        console.log(e);
+        if (e instanceof z.ZodError) {
+          setIsLinkValid(false);
+          const error = JSON.parse(e.message)
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+          toast.error(error[0].message)
+        } 
       }
     },
   });
@@ -70,8 +95,11 @@ export default function Home() {
         <Header />
         <div className={styles.container}>
           <form onSubmit={formik.handleSubmit} className={styles.contentForm}>
-            <h1 className={styles.title}>Encurtador de link</h1>
-            <p className={styles.text}>Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.</p>
+            <h1 className={styles.title}>
+              {newLink ? 'Uhull agora você tem um link curto!' : 'Encurtador de link'}</h1>
+            <p className={styles.text}>
+              {newLink ? 'Agora é só copiar e compartilhar com a galera.' : 
+              'Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.'}</p>
               {!newLink && (
               <div className={styles.input}>
                 <TextField 
@@ -80,6 +108,7 @@ export default function Home() {
                   label="*Seu link longo:" 
                   placeholder="Cole o link aqui" 
                   formik={formik} 
+                  isLinkValid={isLinkValid}
                 />
               </div>
            )}
@@ -87,27 +116,53 @@ export default function Home() {
               <>
               <div className={styles.longLink}>
                 <h2 className={styles.titleLink}>Link longo:</h2>
-                <Link href={formik.values.longLink} aria-label="Abrir link longo" className={styles.textLink}>{formik.values.longLink}</Link>
+                <Link 
+                  id="big-link"
+                  href={formik.values.longLink} 
+                  aria-label="Abrir link longo" 
+                  className={styles.textLink}
+                  target="_blank"
+                >
+                  {formik.values.longLink}
+                </Link>
               </div>
             <div className={styles.newLink}>
             <h2 className={styles.titleLink}>Link curto:</h2>
               <div className={styles.content}>
-                <Link href={newLink} aria-label="Abrir link curto" className={styles.textNewLink}>{newLink}</Link>
-                <button className={styles.buttonCopy} onClick={() => handleCopy()} type="button">Copiar link</button>
+                <Link 
+                  id="small-link"
+                  target="_blank"
+                  href={newLink} 
+                  aria-label="Abrir link curto" 
+                  className={styles.textNewLink}
+                >
+                  {newLink}
+                </Link>
+                <button id="copiar-link" className={styles.buttonCopy} onClick={() => handleCopy()} type="button">Copiar link</button>
               </div>
-              
+              <div className={styles.shortenNewLink}>
+              <Button 
+              text="Encurtar um novo link" 
+              type="button" 
+              onClick={handleShortenNewLink} />
+              </div>
             </div>
             </>
           )}
             <div className={styles.contentButton}>
               {!newLink && (
-            <Button text="Encurtar link" type="submit" />
+            <Button id="encurtar-link" text="Encurtar link" type="submit" />
             )}
            
             </div>
           </form>
           <div className={styles.contentImage}>
             <Image className={styles.img} src={background} loading="lazy" alt="background personalize link"  />
+            <div className={styles.textImage}>
+              <h2>É fácil,</h2>
+              <h2>É prático,</h2>
+              <h2>e rápido!</h2>
+            </div>
             </div>
         </div>
       </div>

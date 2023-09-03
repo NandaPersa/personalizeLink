@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { api } from '~/utils/api';
@@ -10,13 +11,16 @@ const Redirect = ({hash}: Props) => {
     const [redirect, setRedirect] = useState(true);
     const convertedData = hash ? api.reference.convert.useQuery({ referenceHash: hash  }) : null
 
+    const router = useRouter();
+
     useEffect(() => {
         if (convertedData?.data?.success && convertedData.data?.origin) {
             window.location.href = convertedData.data?.origin
         } else {
             setRedirect(false);
+            router.push('/404')
         }
-    }, [hash, convertedData]);
+    }, [hash, convertedData, router]);
 
     return redirect ? null : <div></div>;
 }
