@@ -21,7 +21,7 @@ export default function Home() {
   
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
-      const smallLink = `${window.location.href}r/${data.link}`.replace('wwww.', '');
+      const smallLink = `${window.location.href}r/${data.link}`.replace('www.', '');
       setNewLink(smallLink)
     },
     onError() {
