@@ -1,0 +1,33 @@
+.animation {
+    display: block;
+    height: 300px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper h1 {
+    font-family: inherit;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.wrapper h2 {
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 16px;
+    display: block;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.contentButton {
+    display: block;
+    margin-top: 16px;
+}

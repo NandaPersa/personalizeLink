@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import background from '../assets/backgroundEncLink.svg'
+import background from '../assets/backgroundEncLink.png'
 import { useFormik } from 'formik';
 import { useState } from "react";
 import Link from "next/link";
@@ -40,6 +40,12 @@ export default function Home() {
     } catch {
       toast.error('Não foi possível copiar o link. Tente Novamente.')
     }
+  }
+
+  function handleShortenNewLink() {
+    setNewLink('');
+    formik.resetForm()
+    
   }
 
   const linkSchema = z.string().refine(value => {
@@ -89,8 +95,11 @@ export default function Home() {
         <Header />
         <div className={styles.container}>
           <form onSubmit={formik.handleSubmit} className={styles.contentForm}>
-            <h1 className={styles.title}>Encurtador de link</h1>
-            <p className={styles.text}>Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.</p>
+            <h1 className={styles.title}>
+              {newLink ? 'Uhull agora você tem um link curto!' : 'Encurtador de link'}</h1>
+            <p className={styles.text}>
+              {newLink ? 'Agora é só copiar e compartilhar com a galera.' : 
+              'Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados.'}</p>
               {!newLink && (
               <div className={styles.input}>
                 <TextField 
@@ -107,27 +116,53 @@ export default function Home() {
               <>
               <div className={styles.longLink}>
                 <h2 className={styles.titleLink}>Link longo:</h2>
-                <Link href={formik.values.longLink} aria-label="Abrir link longo" className={styles.textLink}>{formik.values.longLink}</Link>
+                <Link 
+                  id="big-link"
+                  href={formik.values.longLink} 
+                  aria-label="Abrir link longo" 
+                  className={styles.textLink}
+                  target="_blank"
+                >
+                  {formik.values.longLink}
+                </Link>
               </div>
             <div className={styles.newLink}>
             <h2 className={styles.titleLink}>Link curto:</h2>
               <div className={styles.content}>
-                <Link href={newLink} aria-label="Abrir link curto" className={styles.textNewLink}>{newLink}</Link>
-                <button className={styles.buttonCopy} onClick={() => handleCopy()} type="button">Copiar link</button>
+                <Link 
+                  id="small-link"
+                  target="_blank"
+                  href={newLink} 
+                  aria-label="Abrir link curto" 
+                  className={styles.textNewLink}
+                >
+                  {newLink}
+                </Link>
+                <button id="copiar-link" className={styles.buttonCopy} onClick={() => handleCopy()} type="button">Copiar link</button>
               </div>
-              
+              <div className={styles.shortenNewLink}>
+              <Button 
+              text="Encurtar um novo link" 
+              type="button" 
+              onClick={handleShortenNewLink} />
+              </div>
             </div>
             </>
           )}
             <div className={styles.contentButton}>
               {!newLink && (
-            <Button text="Encurtar link" type="submit" />
+            <Button id="encurtar-link" text="Encurtar link" type="submit" />
             )}
            
             </div>
           </form>
           <div className={styles.contentImage}>
             <Image className={styles.img} src={background} loading="lazy" alt="background personalize link"  />
+            <div className={styles.textImage}>
+              <h2>É fácil,</h2>
+              <h2>É prático,</h2>
+              <h2>e rápido!</h2>
+            </div>
             </div>
         </div>
       </div>
