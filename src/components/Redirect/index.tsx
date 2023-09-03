@@ -14,9 +14,9 @@ const Redirect = ({hash}: Props) => {
     const router = useRouter();
 
     useEffect(() => {
-        if (convertedData?.data?.success && convertedData.data?.origin) {
+        if (convertedData?.data && convertedData?.data?.success && convertedData.data?.origin) {
             window.location.href = convertedData.data?.origin
-        } else {
+        } else if(convertedData?.data){
             setRedirect(false);
             router.push('/404')
         }
