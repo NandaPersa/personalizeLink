@@ -25,7 +25,7 @@ export default function Home() {
   
   const {mutate: createReference} = api.reference.create.useMutation({
     onSuccess(data) {
-      const smallLink = `${window.location.href}r/${data.link}`.replace('www.', '');
+      const smallLink = `${window.location.origin}/r/${data.link}`.replace('www.', '');
       setShortLink(smallLink)
     },
     onError() {
@@ -102,12 +102,21 @@ export default function Home() {
     <>
       <Head>
         <title>PersonalizeLink | Link para whatsapp</title>
-        <meta name="description" content="Encurtador de links e urls. Encurte seu link de maneira gratís, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados." />
-        <meta name="keywords" content="Encurtador de url; Encurtador de links; Deixar link curto; Criar link curto;"></meta>
+        <meta name="description" content="Gerador de link do whatsapp. Gere seu link do whatsapp de maneira gratís, rápida e prática! Aqui é possível criar links do whatsapp fáceis de serem compartilhados." />
+        <meta name="keywords" content="Gerador de link do whatsapp; Gerador de links; Link whatsapp; whatsapp;"></meta>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+    
+        <meta name="og:title" content="Gerar Link Whatsapp" />
+        <meta name="og:description" content="Crie grátis seu link de WhatsApp em instantes! Compartilhe nos canais digitais para iniciar conversas em apenas um clique." />
+        <meta property="og:url" content="https://www.2link.fun" />
+        <meta property="og:site_name" content="Personalize Link" />
+        <meta property="og:image" content="https://www.2link.fun/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FbackgroundWhatsapp.083a1121.webp&w=1080&q=75" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.main}>
         <Header />
@@ -160,7 +169,7 @@ export default function Home() {
                   <Link 
                     id="small-link"
                     target="_blank"
-                    href={newLink} 
+                    href={shortLink} 
                     aria-label="Abrir link" 
                     className={styles.textNewLink}
                   >
