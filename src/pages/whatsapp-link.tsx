@@ -40,7 +40,7 @@ export default function Home() {
 
   function handleCopy() {
     try{
-    void navigator.clipboard.writeText(newLink ?? '');
+    void navigator.clipboard.writeText(shortLink ?? '');
       toast.success('Link copiado com sucesso!')
     } catch {
       toast.error('Não foi possível copiar o link. Tente Novamente.')
@@ -114,7 +114,7 @@ export default function Home() {
         <meta name="og:description" content="Crie grátis seu link de WhatsApp em instantes! Compartilhe nos canais digitais para iniciar conversas em apenas um clique." />
         <meta property="og:url" content="https://www.2link.fun" />
         <meta property="og:site_name" content="Personalize Link" />
-        <meta property="og:image" content="https://www.2link.fun/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FbackgroundWhatsapp.083a1121.webp&w=1080&q=75" />
+        <meta property="og:image" content="https://www.2link.fun/backgroundWhatsapp.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
