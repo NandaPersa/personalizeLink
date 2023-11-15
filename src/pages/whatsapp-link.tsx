@@ -189,12 +189,7 @@ export default function Home() {
           </form>
           <div className={styles.contentImage}>
             <Image className={styles.img} src={background} loading="lazy" alt="background personalize link"  />
-            <div className={styles.textImage}>
-              <h2>É fácil,</h2>
-              <h2>É prático,</h2>
-              <h2>e rápido!</h2>
-            </div>
-            </div>
+          </div>
         </div>
       </div>
     </>
