@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import background from '../assets/backgroundEncLink.png'
+import background from '../assets/backgroundEncLink.svg'
 import { useFormik } from 'formik';
 import { useState } from "react";
 import Link from "next/link";
@@ -106,7 +106,7 @@ export default function Home() {
                 <TextField 
                   type="url"
                   name="longLink" 
-                  label="*Seu link longo:" 
+                  label="Seu link longo*" 
                   placeholder="Cole o link aqui" 
                   formik={formik} 
                   isLinkValid={isLinkValid}
@@ -124,7 +124,7 @@ export default function Home() {
                   className={styles.textLink}
                   target="_blank"
                 >
-                  {formik.values.longLink}
+                  {`${formik.values.longLink.substring(0,150)} ${formik.values.longLink.length > 150 ? '...': ''}`}
                 </Link>
               </div>
             <div className={styles.newLink}>
@@ -159,11 +159,6 @@ export default function Home() {
           </form>
           <div className={styles.contentImage}>
             <Image className={styles.img} src={background} loading="lazy" alt="background personalize link"  />
-            <div className={styles.textImage}>
-              <h2>É fácil,</h2>
-              <h2>É prático,</h2>
-              <h2>e rápido!</h2>
-            </div>
             </div>
         </div>
       </div>
