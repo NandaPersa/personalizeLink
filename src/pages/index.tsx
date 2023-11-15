@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import TextField from "~/components/TextField";
 import { api } from "~/utils/api";
 import Image from "next/image";
-import background from '../assets/backgroundEncLink.svg'
+import background from '../assets/backgroundEncLink.webp'
 import { useFormik } from 'formik';
 import { useState } from "react";
 import Link from "next/link";
@@ -91,6 +91,14 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        <meta name="og:title" content="Encurtar link" />
+        <meta name="og:description" content="Encurte seu link de maneira grátis, rápida e prática! Aqui é possível criar links curtos e fáceis de serem compartilhados." />
+        <meta property="og:url" content="https://www.2link.fun" />
+        <meta property="og:site_name" content="Personalize Link" />
+        <meta property="og:image" content="https://personalize-link-git-feature-add-link-whatsapp-nandapersa.vercel.app/_next/static/media/backgroundEncLink.727fbc62.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className={styles.main}>
         <Header />
