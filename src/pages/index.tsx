@@ -99,6 +99,8 @@ export default function Home() {
         <meta property="og:image" content="https://www.2link.fun/backgroundEncLink.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+
+        <link rel="canonical" href="https://www.2link.fun/" />
       </Head>
       <div className={styles.main}>
         <Header />

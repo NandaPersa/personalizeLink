@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Inter } from 'next/font/google'
 import Script from "next/script";
+import Head from "next/head";
 const inter = Inter({
   subsets: ['latin'],
   display: "swap",
@@ -30,6 +31,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     `,
     }}
   />
+  <Head>
+    <meta name="robots" content="all" />
+  </Head>
         
   <main className={inter.className}>
     <Component {...pageProps} />
