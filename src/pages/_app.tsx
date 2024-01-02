@@ -31,9 +31,23 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     `,
     }}
   />
+
   <Head>
     <meta name="robots" content="all" />
   </Head>
+
+   <Script
+    id='teste'
+    type="text/javascript"
+    dangerouslySetInnerHTML={{
+      __html: ` (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "k7xx2pq5fb");
+    `,
+    }}
+  />
         
   <main className={inter.className}>
     <Component {...pageProps} />
