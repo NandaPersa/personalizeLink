@@ -1,30 +1,50 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { type InputHTMLAttributes } from 'react';
+import React, { type TextareaHTMLAttributes } from 'react';
 import { type FormikProps } from 'formik';
-import styles from './textField.module.css'
+import styles from './textField.module.css';
 
-interface Props extends InputHTMLAttributes<HTMLElement> {
-    label: string;
-    placeholder: string;
-    name: string,
-    formik: FormikProps<any>;
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label: string;
+  placeholder: string;
+  name: string;
+  formik: FormikProps<any>;
+  hint?: string;
 }
 
-const Textarea = ({label, placeholder, name, formik}: Props) => {
+const Textarea = ({
+  label,
+  placeholder,
+  name,
+  formik,
+  hint,
+  rows = 3,
+  ...rest
+}: Props) => {
+  const value = formik.values[name] ?? '';
+
   return (
     <div className={styles.container}>
-        <label className={styles.label}>{label}</label>
+      <div className={styles.labelRow}>
+        {label && <label htmlFor={name} className={styles.label}>{label}</label>}
+        {hint && <span className={styles.hint}>{hint}</span>}
+      </div>
+      <div className={styles.inputWrapper}>
         <textarea
+          id={name}
           name={name}
+          rows={rows}
           placeholder={placeholder}
           className={styles.inputText}
-          value={formik.values[name]}
-          onChange={formik.handleChange} 
-      />
+          value={value}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          {...rest}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default Textarea;

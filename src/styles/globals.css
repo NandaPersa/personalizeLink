@@ -1,53 +1,162 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* Modern CSS Reset & Design System Tokens */
+:root {
+  /* Brand Palette */
+  --color-primary: #4628A4;
+  --color-primary-dark: #351e7f;
+  --color-primary-light: #6443cf;
+  --color-accent-pink: #D632D9;
+  --color-accent-pink-hover: #c424c7;
+  --color-accent-magenta: #E330D4;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #128C7E;
+  --color-whatsapp-hover: #20bd5a;
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	box-sizing: border-box;
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #4628A4 0%, #7C3AED 50%, #D632D9 100%);
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(70, 40, 164, 0.08) 0%, rgba(214, 50, 217, 0.08) 100%);
+  --gradient-accent: linear-gradient(135deg, #D632D9 0%, #E330D4 100%);
+  --gradient-accent-hover: linear-gradient(135deg, #c424c7 0%, #cc26be 100%);
+  --gradient-whatsapp: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  --gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+
+  /* Neutrals & Surfaces */
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F1F5F9;
+  --color-surface-subtle: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
+  --color-border-focus: #7C3AED;
+
+  /* Typography Colors */
+  --color-text-title: #0F172A;
+  --color-text-body: #334155;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748B;
+  --color-text-light: #94A3B8;
+
+  /* Status Colors */
+  --color-success: #10B981;
+  --color-success-bg: #ECFDF5;
+  --color-error: #EF4444;
+  --color-error-bg: #FEF2F2;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px 0 rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 6px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 24px 48px -12px rgba(70, 40, 164, 0.16);
+  --shadow-glow-purple: 0 0 28px -4px rgba(70, 40, 164, 0.3);
+  --shadow-glow-pink: 0 0 28px -4px rgba(214, 50, 217, 0.35);
+  --shadow-glow-whatsapp: 0 0 28px -4px rgba(37, 211, 102, 0.35);
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-text-body);
+  font-family: 'Inter', var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(70, 40, 164, 0.07) 0px, transparent 50%),
+    radial-gradient(at 90% 15%, rgba(214, 50, 217, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 95%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
-:focus {
-	outline: transparent;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Text Selection */
+::selection {
+  background-color: var(--color-accent-pink);
+  color: #FFFFFF;
+}
+
+/* Links & Buttons base */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+/* Global Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

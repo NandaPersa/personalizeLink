@@ -1,5 +1,7 @@
-# Allow all crawlers
+# PersonalizeLink Robots.txt
 User-agent: *
 Allow: /
+Disallow: /r/
+Disallow: /api/
 
-sitemap: https://www.2link.fun/sitemap.xml
+Sitemap: https://www.2link.fun/sitemap.xml

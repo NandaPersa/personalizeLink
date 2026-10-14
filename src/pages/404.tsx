@@ -1,53 +1,76 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
-import Lottie from 'react-lottie';
-import animationData from '~/assets/lotties/BISXCbEZLm.json';
-import styles from './404.module.css'
-import Header from '~/components/Header';
-import Button from '~/components/Button';
-import { useRouter } from 'next/router';
-import useScreenSize from '~/hooks/resize';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import animationData from '~/assets/lotties/BISXCbEZLm.json';
+import styles from './404.module.css';
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
+import Button from '~/components/Button';
+import useScreenSize from '~/hooks/resize';
+import { House } from '@phosphor-icons/react';
 
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
-const pageNotFound = () => {
+const PageNotFound = () => {
   const router = useRouter();
-  const {isMobile} = useScreenSize();
+  const { isMobile } = useScreenSize();
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice"
-    }
+      preserveAspectRatio: 'xMidYMid slice',
+    },
   };
 
   const handleRedirectToHome = () => {
-    void router.push('/')
-  }
+    void router.push('/');
+  };
 
   return (
     <>
       <Head>
-        <title>PersonalizeLink | 404</title>
+        <title>PersonalizeLink | Página Não Encontrada (404)</title>
       </Head>
-      <div className={styles.wrapper}>
-          <Header />
-      <div className={styles.animation}>
-        <Lottie 
-          options={defaultOptions}
-          width={isMobile ? 270 : 450}
-          height={isMobile  ? 200 : 300}
-        />
-      </div>
-      <h1>Ooooops...</h1>
-      <h2>Parece que o caminho que você está procurando não existe ou não está mais acessível.</h2>
-      <div className={styles.contentButton}>
-      <Button text='Voltar para Home' type='button' onClick={handleRedirectToHome}/>
-      </div>
+
+      <div className={styles.pageWrapper}>
+        <Header />
+
+        <main className={styles.main}>
+          <div className={styles.card}>
+            <div className={styles.animation}>
+              <Lottie
+                options={defaultOptions}
+                width={isMobile ? 260 : 380}
+                height={isMobile ? 180 : 260}
+              />
+            </div>
+
+            <span className={styles.badge}>Erro 404</span>
+            <h1 className={styles.title}>Ooooops... Página Não Encontrada</h1>
+            <p className={styles.text}>
+              Parece que o caminho ou link encurtado que você está procurando não existe, foi
+              removido ou não está mais acessível.
+            </p>
+
+            <div className={styles.actions}>
+              <Button
+                size="lg"
+                leftIcon={<House size={18} weight="fill" />}
+                onClick={handleRedirectToHome}
+              >
+                Voltar para a Página Inicial
+              </Button>
+            </div>
+          </div>
+        </main>
+
+        <Footer />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default pageNotFound;
+export default PageNotFound;

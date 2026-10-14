@@ -1,0 +1,246 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.heroSection {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 24px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badgeWrapper {
+  margin-bottom: 20px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--gradient-brand-subtle);
+  border: 1px solid rgba(70, 40, 164, 0.15);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.badgeIcon {
+  color: var(--color-accent-pink);
+}
+
+.title {
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--color-text-title);
+  margin-bottom: 20px;
+}
+
+.gradientText {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 680px;
+}
+
+/* Pillars Section */
+.pillarsSection {
+  width: 100%;
+  max-width: 1100px;
+  padding: 24px 24px 48px;
+  margin: 0 auto;
+}
+
+.pillarsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.pillarCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all var(--transition-normal);
+}
+
+.pillarCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(70, 40, 164, 0.25);
+}
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-brand-subtle);
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pillarCard h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-title);
+}
+
+.pillarCard p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* Story Section */
+.storySection {
+  width: 100%;
+  max-width: 900px;
+  padding: 24px 24px 56px;
+  margin: 0 auto;
+}
+
+.storyCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 44px;
+  box-shadow: var(--shadow-md);
+}
+
+.storyTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text-title);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.storyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.checkIcon {
+  color: var(--color-primary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.checkItem h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-title);
+  margin-bottom: 4px;
+}
+
+.checkItem p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.ctaSection {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 24px 80px;
+  margin: 0 auto;
+}
+
+.ctaCard {
+  background: linear-gradient(135deg, rgba(70, 40, 164, 0.06) 0%, rgba(214, 50, 217, 0.08) 100%);
+  border: 1px solid rgba(70, 40, 164, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.ctaCard h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-text-title);
+}
+
+.ctaCard p {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 820px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .storyCard {
+    padding: 28px 20px;
+  }
+
+  .ctaCard {
+    padding: 32px 20px;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ctaButtons a {
+    width: 100%;
+  }
+
+  .ctaButtons button {
+    width: 100%;
+  }
+}
